@@ -8,4 +8,4 @@ STEP 1: clone project
 STEP 2: Go to project folder
 
 STEP 3: run below command on terminal
-    => php -S localhost:3000 
+    => php -S localhost:3000 public/index.php
