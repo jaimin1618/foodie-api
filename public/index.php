@@ -10,4 +10,4 @@ if ($_SERVER['REQUEST_URI'] === '/') {
   echo "<h1>index.php</h1>";
 }
 
-require_once __DIR__ . '/../../private/init.php';
+require_once __DIR__ . '/../init.php';

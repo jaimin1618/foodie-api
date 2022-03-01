@@ -1,12 +1,9 @@
 <?php
 
 require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/db_connect.php';
 require_once __DIR__ . '/routes.php';
 
-/**
- * App class/Model loading
- */
+/* App class/Model loading */
 // automatic class load
 function auto_class_load(string $class_name) {
   if (preg_match('/\A\w+\Z/', $class_name)) {
@@ -18,9 +15,17 @@ spl_autoload_register('auto_class_load');
 /**
  * App database connection
  */
-$db = db_connect();
-confirm_connection($db);
-DB::set_database($db); // this will is database for each classes
+$db = [
+    'host' => DB_HOST,
+    'user' => DB_USER,
+    'password' => DB_PASS,
+    'name' => DB_NAME
+];
+
+DB::set_database(
+    (new DBConnect($db))::$conn
+); // this will set database for each classes
+
 
 /**
  * App router
@@ -28,8 +33,9 @@ DB::set_database($db); // this will is database for each classes
 $router = new Router($routes);
 
 $url = $_SERVER['REQUEST_URI'];
+
 if ($url == '/') {
-  require_once dirname(__DIR__) . "/public/api/index.php";
+    require_once __DIR__ . "/public/index.php";
 } else {
-  require_once dirname(__DIR__) . "/public/api/{$router->route($url)}";
+    require_once __DIR__ . "/public/{$router->route($url)}";
 }
