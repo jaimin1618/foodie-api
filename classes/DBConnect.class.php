@@ -1,18 +1,18 @@
 <?php
 
 class DBConnect {
-    static private string $db_host;
-    static private string $db_user;
-    static private string $db_pass;
-    static private string $db_name;
+    private static string $db_host;
+    private static string $db_user;
+    private static string $db_pass;
+    private static string $db_name;
 
-    static public mysqli $conn;
+    public static mysqli $conn;
 
     /**
      * @param array for database config
      * @return mysqli connection
      */
-    public function __construct(Array $db) {
+    public function __construct(array $db) {
         self::$db_host = $db['host'];
         self::$db_user = $db['user'];
         self::$db_pass = $db['password'];
@@ -20,8 +20,8 @@ class DBConnect {
 
         self::$conn = new mysqli(
             self::$db_host,
-            self::$db_user, 
-            self::$db_pass, 
+            self::$db_user,
+            self::$db_pass,
             self::$db_name
         );
 
@@ -31,9 +31,9 @@ class DBConnect {
 
     public function check_connection() {
         if (self::$conn->connect_errno) {
-            $message = "Database Connection Failed: ";
+            $message = 'Database Connection Failed: ';
             $message .= self::$conn->connect_error;
-            $message .= "[" . self::$conn->connect_errno . "];";
+            $message .= '[' . self::$conn->connect_errno . '];';
             exit($message);
         }
     }

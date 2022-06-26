@@ -4,6 +4,11 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/routes.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST');
+header('Allow-Access-Control-Allowed-Headers: Allow-Access-Control-Allowed-Headers, Access-Control-Allow-Methods, Content-Type, Authorization, X-Requested-With');
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 $dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
